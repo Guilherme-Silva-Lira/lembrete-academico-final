@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-bs-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="style.css" rel="stylesheet">
+
+<title>Cadastro</title>
+</head>
+
+<body class="d-flex align-items-center py-4 bg-body-tertiary">
+
+<main class="form-container text-center">
+
+  <img src="logo.png2.png" class="logo mb-2"> <!-- ajuste se necessário -->
+
+  <h5 class="mb-4">Sistema de Lembrete Acadêmico</h5>
+
+  <h1 class="h4 mb-4 fw-normal">Criar conta</h1>
+
+  <!-- AQUI ESTÁ A SIMULAÇÃO -->
+  <form onsubmit="cadastrar(event)">
+
+    <div class="form-floating mb-2">
+      <input type="text" class="form-control" id="nome" required placeholder="Seu nome">
+      <label for="nome">Nome completo</label>
+    </div>
+
+    <div class="form-floating mb-2">
+      <input type="email" class="form-control" id="email" required placeholder="seuemail@gmail.com">
+      <label for="email">E-mail</label>
+    </div>
+
+    <div class="form-floating mb-2">
+      <input type="password" class="form-control" id="senha" required placeholder="Senha">
+      <label for="senha">Senha</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="password" class="form-control" id="confirmarSenha" required placeholder="Confirmar senha">
+      <label for="confirmarSenha">Confirmar senha</label>
+    </div>
+
+    <button type="submit" class="btn btn-success w-100 py-2">Cadastrar</button>
+
+    <p class="mt-3 text-center">
+      Já tem uma conta? 
+      <a href="login.html">Entrar</a>
+    </p>
+
+    <p class="mt-4 text-secondary">© 2026</p>
+
+  </form>
+
+</main>
+
+<!-- SCRIPT -->
+<script>
+function cadastrar(event){
+    event.preventDefault();
+
+    alert("Cadastro realizado com sucesso!");
+
+    window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
