@@ -1,125 +1,64 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-br" data-bs-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<title>Nova Atividade</title>
-
-<style>
-.card{
-    max-width: 600px;
-    margin: auto;
-}
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atividade | Sistema de Lembrete Acadêmico</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
 </head>
-
-<body class="bg-body-tertiary d-flex align-items-center" style="min-height:100vh;">
-
-<div class="container">
-
-  <div class="card shadow-lg p-4">
-
-    <!-- TOPO -->
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <h4 class="mb-0">Nova Atividade</h4>
-      <a href="dashboard.html" class="btn btn-outline-light">⬅ Dashboard</a>
+<body class="app-page activity-page">
+  <nav class="navbar app-navbar"><div class="container-xl"><a class="navbar-brand d-flex align-items-center gap-2" href="dashboard.html"><img src="logo-icon.png" class="nav-logo" alt="Sistema de Lembrete Acadêmico"><span class="fw-bold">Lembrete Acadêmico</span></a><a href="dashboard.html" class="btn btn-outline-light"><i class="bi bi-arrow-left me-1"></i>Dashboard</a></div></nav>
+  <main class="container py-4 py-lg-5">
+    <section class="form-panel mx-auto">
+      <div class="text-center mb-4"><img src="logo-icon.png" class="form-logo mb-3" alt="Sistema de Lembrete Acadêmico"><p class="section-kicker mb-1">Planejamento acadêmico</p><h1 class="h2 fw-bold mb-2" id="tituloPagina">Nova atividade</h1><p class="text-secondary mb-0">Cadastre e organize suas tarefas acadêmicas por prazo e prioridade.</p></div>
+      <form id="formAtividade" class="needs-validation" novalidate>
+        <div class="row g-3">
+          <div class="col-md-6"><label class="form-label" for="titulo">Título</label><input type="text" class="form-control" id="titulo" placeholder="Ex: Trabalho de Matemática" required><div class="invalid-feedback">Informe o título da atividade.</div></div>
+          <div class="col-md-6"><label class="form-label" for="disciplina">Disciplina</label><input type="text" class="form-control" id="disciplina" placeholder="Ex: Matemática" required><div class="invalid-feedback">Informe a disciplina.</div></div>
+          <div class="col-md-6"><label class="form-label" for="data">Data de entrega</label><input type="date" class="form-control" id="data" required><div class="invalid-feedback">Informe a data de entrega.</div></div>
+          <div class="col-md-6"><label class="form-label" for="prioridade">Prioridade</label><select class="form-select" id="prioridade" required><option value="">Selecione</option><option value="Alta">Alta</option><option value="Média">Média</option><option value="Baixa">Baixa</option></select><div class="invalid-feedback">Selecione a prioridade.</div></div>
+          <div class="col-12"><label class="form-label" for="link">Link do material <span class="text-secondary">(opcional)</span></label><input type="url" class="form-control" id="link" placeholder="Ex: https://classroom.google.com/"><div class="form-text">Classroom, Drive, Teams ou outro material de apoio.</div></div>
+          <div class="col-12"><label class="form-label" for="descricao">Descrição</label><textarea class="form-control" id="descricao" rows="5" placeholder="Ex: Elaborar apresentação e entregar até sexta-feira." required></textarea><div class="invalid-feedback">Descreva a atividade.</div></div>
+        </div>
+        <div class="d-flex flex-column flex-sm-row gap-3 mt-4"><button type="submit" class="btn btn-success btn-lg flex-fill"><i class="bi bi-save me-2"></i>Salvar atividade</button><a href="dashboard.html" class="btn btn-outline-light btn-lg flex-fill">Cancelar</a></div>
+      </form>
+    </section>
+  </main>
+  <footer class="team-footer container-xl py-4">
+    <span>Equipe:</span>
+    <strong>Guilherme</strong>
+    <strong>Leonardo</strong>
+    <strong>Lucas</strong>
+    <strong>Rafael</strong>
+    <strong>Thiago</strong>
+  </footer>
+  <div class="modal fade" id="confirmarDataModal" tabindex="-1" aria-labelledby="confirmarDataTitulo" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-secondary">
+          <h2 class="modal-title h5" id="confirmarDataTitulo"><i class="bi bi-exclamation-triangle text-warning me-2"></i>Confirmar data anterior</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          A data escolhida é anterior à data de hoje. Deseja manter essa data mesmo assim?
+        </div>
+        <div class="modal-footer border-secondary">
+          <button type="button" class="btn btn-outline-light" id="corrigirDataBtn">Corrigir data</button>
+          <button type="button" class="btn btn-warning" id="manterDataBtn">Manter mesmo assim</button>
+        </div>
+      </div>
     </div>
-
-    <!-- FORM -->
-    <form onsubmit="salvarAtividade(event)">
-
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="titulo" placeholder="Título" required>
-        <label for="titulo">Título</label>
-      </div>
-
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="disciplina" placeholder="Disciplina" required>
-        <label for="disciplina">Disciplina</label>
-      </div>
-
-      <div class="form-floating mb-3">
-        <textarea class="form-control" id="descricao" placeholder="Descrição" style="height:100px"></textarea>
-        <label for="descricao">Descrição</label>
-      </div>
-
-      <div class="form-floating mb-3">
-        <input type="date" class="form-control" id="dataEntrega" required>
-        <label for="dataEntrega">Data de entrega</label>
-      </div>
-
-      <div class="form-floating mb-4">
-        <select class="form-select" id="prioridade" required>
-          <option value="">Selecione</option>
-          <option value="alta">Alta</option>
-          <option value="media">Média</option>
-          <option value="baixa">Baixa</option>
-        </select>
-        <label for="prioridade">Prioridade</label>
-      </div>
-
-      <button class="btn btn-success w-100 py-2">Salvar atividade</button>
-
-      <!-- BOTÃO EXTRA -->
-      <p class="mt-3 text-center">
-        <a href="dashboard.html" class="btn btn-outline-primary w-100">Ver atividades</a>
-      </p>
-
-    </form>
-
   </div>
-
-</div>
-
-<script>
-let editIndex = localStorage.getItem("editarIndex");
-
-window.onload = function(){
-    if(editIndex !== null){
-        let atividades = JSON.parse(localStorage.getItem("atividades")) || [];
-        let atividade = atividades[editIndex];
-
-        document.getElementById("titulo").value = atividade.titulo;
-        document.getElementById("disciplina").value = atividade.disciplina;
-        document.getElementById("descricao").value = atividade.descricao;
-        document.getElementById("dataEntrega").value = atividade.data;
-        document.getElementById("prioridade").value = atividade.prioridade;
-
-        document.querySelector("h4").innerText = "Editar Atividade";
-    }
-}
-
-function salvarAtividade(event){
-    event.preventDefault();
-
-    let atividades = JSON.parse(localStorage.getItem("atividades")) || [];
-
-    const atividade = {
-        titulo: document.getElementById("titulo").value,
-        disciplina: document.getElementById("disciplina").value,
-        descricao: document.getElementById("descricao").value,
-        data: document.getElementById("dataEntrega").value,
-        prioridade: document.getElementById("prioridade").value
-    };
-
-    if(editIndex !== null){
-        atividades[editIndex] = atividade;
-        localStorage.removeItem("editarIndex");
-        alert("Atividade atualizada com sucesso!");
-    } else {
-        atividades.push(atividade);
-        alert("Atividade cadastrada com sucesso!");
-    }
-
-    localStorage.setItem("atividades", JSON.stringify(atividades));
-
-    window.location.href = "dashboard.html";
-}
-</script>
-
+  <div class="toast-container position-fixed top-0 end-0 p-3" id="toastContainer"></div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/activity.js"></script>
 </body>
 </html>
+
+
+
+
+
